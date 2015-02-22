@@ -1,0 +1,15 @@
+MYGCC = g++ -v -std=gnu++11
+MYCOMPILESWITCHES = `pkg-config gtkmm-3.0 --cflags` 
+MYLIBSWITCHES = -L /mingw64/lib -lboost_system-mt -lboost_filesystem-mt -lboost_serialization-mt -lboost_iostreams-mt -lboost_date_time-mt `pkg-config gtkmm-3.0 --libs`
+
+all: gtksnowloadcount
+
+
+gtksnowloadcount:
+	$(MYGCC) $(MYCOMPILESWITCHES) -c gtksnowloadcountassistant.cc $(MYLIBSWITCHES)
+	$(MYGCC) $(MYCOMPILESWITCHES) -c gtksnowloadcountmain.cc $(MYLIBSWITCHES)
+	$(MYGCC) $(MYCOMPILESWITCHES) -c snldb.cc  $(MYLIBSWITCHES)
+	$(MYGCC) $(MYCOMPILESWITCHES) gtksnowloadcountassistant.o gtksnowloadcountmain.o snldb.o -o gtksnowloadcount $(MYLIBSWITCHES)
+
+
+
